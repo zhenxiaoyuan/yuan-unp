@@ -12,6 +12,8 @@
 #include	<stdio.h>
 #include	<stdlib.h>
 #include	<string.h>
+#include	<fcntl.h>
+#include	<unistd.h>
 /* Following could be derived from SOMAXCONN in <sys/socket.h>, but many
    kernels still #define it as 5, while actually supporting many more */
 #define	LISTENQ		1024	/* 2nd argument to listen() */
@@ -29,6 +31,7 @@
 int		Socket(int, int, int);
 
 void	Bind(int, const SA *, socklen_t);
+void	Connect(int, const SA*, socklen_t);
 void	Listen(int, int);
 int		Accept(int, SA *, socklen_t *);
 
@@ -36,7 +39,16 @@ pid_t	Fork(void);
 void	Close(int);
 
 void	Writen(int, void *, size_t);
+ssize_t	Readline(int, void *, size_t);
+
+char	*Fgets(char *, int, FILE *);
+void	Fputs(const char *, FILE *);
+
+const char		*Inet_ntop(int, const void *, char *, size_t);
+void			Inet_pton(int, const char *, void *);
 
 void daemon_inetd(const char *, int);
+void str_cli(FILE *, int);
+void str_echo(int);
 
 #endif	/* __unp_h */

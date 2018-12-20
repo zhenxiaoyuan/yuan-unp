@@ -1,5 +1,6 @@
 #include	"yuan_unp.h"
 
+#include	<stdarg.h>
 #include	<syslog.h>
 
 int		daemon_proc;
@@ -20,6 +21,19 @@ err_sys(const char *fmt, ...)
 	exit(1);
 }
 
+/* Fatal error unrelated to system call
+ * Print message and terminate */
+void
+err_quit(const char*fmt, ...)
+{
+	va_list		ap;
+
+	va_start(ap, fmt);
+	err_doit(0, LOG_ERR, fmt, ap);
+	va_end(ap);
+	exit(1);
+}
+
 /* Print message and return to caller
  * Caller specifies "errnoflag" and "level" */
 
@@ -36,6 +50,8 @@ err_doit(int errnoflag, int level, const char *fmt, va_list ap)
 	vsprintf(buf, fmt, ap);				/* not safe */
 #endif
 	n = strlen(buf);
+	/* If error related to system call
+	 * Print system error first */
 	if (errnoflag)
 		snprintf(buf + n, MAXLINE - n, ": %s", strerror(errno_save));
 	strcat(buf, "\n");
