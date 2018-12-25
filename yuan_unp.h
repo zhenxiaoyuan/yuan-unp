@@ -10,6 +10,7 @@
 
 #include	<errno.h>
 #include	<stdio.h>
+#include	<signal.h>
 #include	<stdlib.h>
 #include	<string.h>
 #include	<fcntl.h>
@@ -50,5 +51,9 @@ void			Inet_pton(int, const char *, void *);
 void daemon_inetd(const char *, int);
 void str_cli(FILE *, int);
 void str_echo(int);
+
+typedef	void	Sigfunc(int);	/* for signal handlers */
+
+Sigfunc *Signal(int, Sigfunc *);
 
 #endif	/* __unp_h */
