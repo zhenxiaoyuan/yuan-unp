@@ -1,30 +1,46 @@
 CC = clang
 CFLAGS = -I. -g -O0 -Wall
+MAKE = make
+
 LIBS = libunp.a
 
 RANLIB = ranlib
 
-LIB_OBJS = error.o readline.o str_cli.o str_echo.o wrapsock.o wrapunix.o wrapstdio.o wraplib.o writen.o signal.o
+DIRS = lib tcpcliserv
+# the sets of directories to do various things in
+BUILDDIRS = $(DIRS:%=build-%)
+INSTALLDIRS = $(DIRS:%=install-%)
+CLEANDIRS = $(DIRS:%=clean-%)
+TESTDIRS = $(DIRS:%=clean-%)
 
-PROGS = tcpserv01 tcpserv04 tcpcli01 tcpcli04
+all: $(BUILDDIRS)
+$(DIRS): $(BUILDDIRS)
+$(BUILDDIRS):
+	$(MAKE) -C $(@:build-%=%)
 
-all:	libs ${PROGS}
+# the tcpcliserv need the libraries in lib built first
+build-tcpcliserv: build-lib
 
-libs:	${LIB_OBJS}
-		ar rv libunp.a $?
-		${RANLIB} libunp.a
+install: $(INSTALLDIRS) all
+$(INSTALLDIRS):
+	$(MAKE) -C $(@:install-%=%) install
 
-tcpserv01:	tcpserv01.o
-	${CC} ${CFLAGS} -o $@ $< ${LIBS}
+test: $(TESTDIRS) all
+$(TESTDIRS):
+	$(MAKE) -C $(@:test-%=%) test
 
-tcpcli01:	tcpcli01.o
-	${CC} ${CFLAGS} -o $@ $< ${LIBS}
+clean: $(CLEANDIRS)
+$(CLEANDIRS):
+	$(MAKE) -C $(@:clean-%=%) clean
 
-tcpserv04:	tcpserv04.o sigchldwaitpid.o
-	${CC} ${CFLAGS} -o $@ $? ${LIBS}
 
-tcpcli04:	tcpcli04.o
-	${CC} ${CFLAGS} -o $@ $< ${LIBS}
+
+include lib/Makefile
+include tcpcliserv/Makefile
+
+all:	libs ${TCPCLISERV}
+
+
 
 clean:
 	rm *.o
