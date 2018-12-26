@@ -1,2 +1,5 @@
-*.o
-*.a
+*
+!*.c
+!Makefile
+!Make.defines
+!README.md

@@ -1,0 +1,4 @@
+CC = clang
+CFLAGS = -I../lib -g -O0 -Wall
+
+LIBS = ../lib/libunp.a

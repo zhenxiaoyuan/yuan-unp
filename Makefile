@@ -1,17 +1,11 @@
-CC = clang
-CFLAGS = -I. -g -O0 -Wall
 MAKE = make
-
-LIBS = libunp.a
-
-RANLIB = ranlib
 
 DIRS = lib tcpcliserv
 # the sets of directories to do various things in
 BUILDDIRS = $(DIRS:%=build-%)
 INSTALLDIRS = $(DIRS:%=install-%)
+TESTDIRS = $(DIRS:%=test-%)
 CLEANDIRS = $(DIRS:%=clean-%)
-TESTDIRS = $(DIRS:%=clean-%)
 
 all: $(BUILDDIRS)
 $(DIRS): $(BUILDDIRS)
@@ -33,15 +27,9 @@ clean: $(CLEANDIRS)
 $(CLEANDIRS):
 	$(MAKE) -C $(@:clean-%=%) clean
 
-
-
-include lib/Makefile
-include tcpcliserv/Makefile
-
-all:	libs ${TCPCLISERV}
-
-
-
-clean:
-	rm *.o
-	rm *.a
+.PHONY: subdirs $(DIRS)
+.PHONY: subdirs $(BUILDDIRS)
+.PHONY: subdirs $(INSTALLDIRS)
+.PHONY: subdirs $(TESTDIRS)
+.PHONY: subdirs $(CLEANDIRS)
+.PHONY: all install test clean
