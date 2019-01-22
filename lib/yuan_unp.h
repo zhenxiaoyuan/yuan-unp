@@ -6,6 +6,7 @@
 
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <unistd.h>
 
 #include	<errno.h>
@@ -29,12 +30,16 @@
 
 #define	SA	struct sockaddr
 
+#define min(a,b)    ((a) < (b) ? (a) : (b))
+#define max(a,b)    ((a) > (b) ? (a) : (b))
+
 int		Socket(int, int, int);
 
 void	Bind(int, const SA *, socklen_t);
 void	Connect(int, const SA*, socklen_t);
 void	Listen(int, int);
 int		Accept(int, SA *, socklen_t *);
+void    Shutdown(int, int);
 
 pid_t	Fork(void);
 void	Close(int);

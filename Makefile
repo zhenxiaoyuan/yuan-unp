@@ -1,6 +1,6 @@
 MAKE = make
 
-DIRS = lib tcpcliserv
+DIRS = lib tcpcliserv select
 # the sets of directories to do various things in
 BUILDDIRS = $(DIRS:%=build-%)
 INSTALLDIRS = $(DIRS:%=install-%)
@@ -14,6 +14,7 @@ $(BUILDDIRS):
 
 # the tcpcliserv need the libraries in lib built first
 build-tcpcliserv: build-lib
+build-select: build-lib
 
 install: $(INSTALLDIRS) all
 $(INSTALLDIRS):

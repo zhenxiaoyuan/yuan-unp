@@ -1,6 +1,6 @@
 include ../Make.defines
 
-all: $(LIB_OBJS)
+all: $(LIBFREE_OBJS)
 	ar rv libunp.a $?
 	$(RANLIB) libunp.a
 
