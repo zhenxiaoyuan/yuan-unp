@@ -1,9 +1,9 @@
 CC = clang
-CFLAGS = -I../lib -g -O0 -D_REENTRANT -Wall
+CFLAGS = -I../lib -g -O0 -D_REENTRANT
 
 LIBS = ../lib/libunp.a
 RANLIB = ranlib
 
-LIB_OBJS = error.o readline.o str_cli.o str_echo.o wrapsock.o wrapunix.o wrapstdio.o wraplib.o writen.o signal.o
+LIB_OBJS = error.o readline.o str_cli.o str_echo.o wrapsock.o wrapunix.o wrapstdio.o wraplib.o writen.o signal.o dg_echo.o
 
 LIBFREE_OBJS = inet_ntop.o
