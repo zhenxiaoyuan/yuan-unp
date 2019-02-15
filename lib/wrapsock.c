@@ -91,3 +91,10 @@ Sendto(int fd, const void *ptr, size_t nbytes, int flags,
     if (sendto(fd, ptr, nbytes, flags, sa, salen) != (ssize_t)nbytes)
         err_sys("sendto error");
 }
+
+void
+Setsockopt(int fd, int level, int optname, const void *optval, socklen_t optlen)
+{
+    if (setsockopt(fd, level, optname, optval, optlen) < 0)
+        err_sys("setsockopt error");
+}

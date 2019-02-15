@@ -47,6 +47,8 @@ void    Shutdown(int, int);
 ssize_t Recvfrom(int, void *, size_t, int, struct sockaddr *, socklen_t *);
 void Sendto(int, const void *, size_t, int, const struct sockaddr *, socklen_t);
 
+void Setsockopt(int, int, int, const void *, socklen_t);
+
 pid_t	Fork(void);
 void	Close(int);
 void    *Malloc(size_t);
