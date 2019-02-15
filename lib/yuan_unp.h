@@ -4,10 +4,12 @@
 #ifndef	__unp_h
 #define	__unp_h
 
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+#include	<sys/socket.h>	/* basic socket definitions */
+#include	<sys/un.h>		/* for Unix domain sockets */
+
+#include    <netinet/in.h>
+#include    <arpa/inet.h>
+#include    <unistd.h>
 
 #include	<errno.h>
 #include	<stdio.h>
@@ -16,6 +18,7 @@
 #include	<string.h>
 #include	<fcntl.h>
 #include	<unistd.h>
+
 /* Following could be derived from SOMAXCONN in <sys/socket.h>, but many
    kernels still #define it as 5, while actually supporting many more */
 #define	LISTENQ		1024	/* 2nd argument to listen() */
@@ -46,6 +49,7 @@ void Sendto(int, const void *, size_t, int, const struct sockaddr *, socklen_t);
 
 pid_t	Fork(void);
 void	Close(int);
+void    *Malloc(size_t);
 
 void	Writen(int, void *, size_t);
 ssize_t	Readline(int, void *, size_t);
@@ -53,14 +57,16 @@ ssize_t	Readline(int, void *, size_t);
 char	*Fgets(char *, int, FILE *);
 void	Fputs(const char *, FILE *);
 
-const char		*Inet_ntop(int, const void *, char *, size_t);
-void			Inet_pton(int, const char *, void *);
+const char	*Inet_ntop(int, const void *, char *, size_t);
+void		Inet_pton(int, const char *, void *);
+char        *Sock_ntop(const struct sockaddr *, socklen_t);
 
 void daemon_inetd(const char *, int);
 void str_cli(FILE *, int);
 void str_echo(int);
 
 void dg_echo(int, SA *, socklen_t);
+void dg_cli(FILE *, int, const SA *, socklen_t);
 
 typedef	void	Sigfunc(int);	/* for signal handlers */
 

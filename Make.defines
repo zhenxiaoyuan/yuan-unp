@@ -4,6 +4,6 @@ CFLAGS = -I../lib -g -O0 -D_REENTRANT
 LIBS = ../lib/libunp.a
 RANLIB = ranlib
 
-LIB_OBJS = error.o readline.o str_cli.o str_echo.o wrapsock.o wrapunix.o wrapstdio.o wraplib.o writen.o signal.o dg_echo.o
+LIB_OBJS = error.o readline.o str_cli.o str_echo.o wrapsock.o wrapunix.o wrapstdio.o wraplib.o writen.o signal.o dg_echo.o dg_cli.o sock_ntop.o
 
-LIBFREE_OBJS = inet_ntop.o
+LIBFREE_OBJS = inet_ntop.o inet_pton.o
