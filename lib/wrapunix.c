@@ -1,5 +1,15 @@
 #include "yuan_unp.h"
 
+int
+Fcntl(int fd, int cmd, int arg)
+{
+    int n;
+
+    if ((n = fcntl(fd, cmd, arg)) == -1)
+        err_sys("fcntl error");
+    return(n);
+}
+
 pid_t
 Fork(void)
 {

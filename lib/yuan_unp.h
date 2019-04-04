@@ -49,6 +49,7 @@ void Sendto(int, const void *, size_t, int, const struct sockaddr *, socklen_t);
 
 void Setsockopt(int, int, int, const void *, socklen_t);
 
+int Fcntl(int, int, int);
 pid_t	Fork(void);
 void	Close(int);
 void    *Malloc(size_t);

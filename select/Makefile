@@ -5,10 +5,10 @@ PROGS = tcpcli_select tcpserv_select
 all: $(PROGS)
 
 install:
-	@echo install-tcpcliserv is unfinished
+	@echo install-selcet is unfinished
 
 test:
-	@echo test-tcpcliserv is unfinished
+	@echo test-select is unfinished
 
 tcpcli_select:	tcpcli01.o strcli_select02.o
 	$(CC) $(CFLAGS) -o $@ $? $(LIBS)

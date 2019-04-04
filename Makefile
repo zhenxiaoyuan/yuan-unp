@@ -1,6 +1,6 @@
 MAKE = make
 
-DIRS = lib tcpcliserv udpcliserv select
+DIRS = lib tcpcliserv udpcliserv select nonblock
 # the sets of directories to do various things in
 BUILDDIRS = $(DIRS:%=build-%)
 INSTALLDIRS = $(DIRS:%=install-%)
@@ -16,6 +16,7 @@ $(BUILDDIRS):
 build-tcpcliserv: build-lib
 build-udpcliserv: build-lib
 build-select: build-lib
+build-nonblock: build-lib
 
 install: $(INSTALLDIRS) all
 $(INSTALLDIRS):
